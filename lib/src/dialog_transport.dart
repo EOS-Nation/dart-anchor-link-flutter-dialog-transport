@@ -6,16 +6,17 @@ import 'package:dart_anchor_link/dart_anchor_link.dart';
 
 class DialogTransport implements LinkTransport {
   BuildContext context;
-  DialogTransport(this.context);
+  String title;
+  DialogTransport(this.context, this.title);
 
   @override
-  void onRequest(SigningRequestManager request,
-      Function({Exception exception, String reason}) cancel) {
+  Future<void> onRequest(SigningRequestManager request,
+      Function({Exception exception, String reason}) cancel) async {
     var uri = request.encode();
-    showDialog(
+    await showDialog(
       context: context,
-      child: DialogTransportWidget(uri, cancel),
-    );
+      child: DialogTransportWidget(this.title, uri),
+    ).then((value) => cancel());
   }
 
   @override
@@ -23,7 +24,7 @@ class DialogTransport implements LinkTransport {
 
   @override
   void onFailure(SigningRequestManager request, Exception exception) {
-    // Called if the request failed. Not used in dialog transport
+    Navigator.pop(context);
   }
 
   @override
@@ -34,7 +35,7 @@ class DialogTransport implements LinkTransport {
 
   @override
   void onSuccess(SigningRequestManager request, TransactResult result) {
-    // Called if the request was successful.  Not used in dialog transport
+    Navigator.pop(context);
   }
 
   @override

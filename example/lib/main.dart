@@ -32,7 +32,7 @@ class _DialogTransportExampleState extends State<DialogTransportExample> {
       // app identifier, should be set to the eosio contract account if applicable
       var identifier = 'pacoeosnatio';
 
-      var transport = DialogTransport(context);
+      var transport = DialogTransport(context, 'Login');
 
       var options = LinkOptions(
         transport,
@@ -52,15 +52,14 @@ class _DialogTransportExampleState extends State<DialogTransportExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          RaisedButton(
-            onPressed: () => this.login(),
-            child: Text('Login'),
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        RaisedButton(
+          onPressed: () => this.login(),
+          child: Text('Login'),
+        ),
+      ],
     );
   }
 }
