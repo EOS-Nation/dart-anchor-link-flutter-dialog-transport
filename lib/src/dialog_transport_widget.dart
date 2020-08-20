@@ -12,60 +12,64 @@ class DialogTransportWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleDialog(
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 20),
+    return Dialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 10,
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: QrImage(
-            data: uri,
-            version: QrVersions.auto,
-            size: 200.0,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Flexible(
+          Align(
+            alignment: Alignment.centerLeft,
             child: Text(
-          uri,
-          overflow: TextOverflow.clip,
-        )),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: Icon(Icons.content_copy),
-              onPressed: () async {
-                await Clipboard.setData(new ClipboardData(text: uri));
-              },
+              title,
+              style: TextStyle(fontSize: 20),
             ),
-            IconButton(
-              icon: Icon(Icons.link),
-              onPressed: () {},
-            )
-          ],
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: RaisedButton(
-            child: Text('Close'),
-            onPressed: () => Navigator.pop(context),
           ),
-        )
-      ],
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(color: Colors.white),
+            child: QrImage(
+              data: uri,
+              version: QrVersions.auto,
+              size: 200.0,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Flexible(
+              child: Text(
+            uri,
+            overflow: TextOverflow.clip,
+          )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.content_copy),
+                onPressed: () async {
+                  await Clipboard.setData(new ClipboardData(text: uri));
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.link),
+                onPressed: () {},
+              )
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: RaisedButton(
+              child: Text('Close'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
